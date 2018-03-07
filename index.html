@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Rock Paper Scissors Part 2
+  </title>
+</head>
+
+<body>
+
+  <div id="game">
+    <!-- Create greeting - 'Chose r, p or s to start playing' -->
+    <h1 id="rps-greeting">Press r, p or s to start playing. r=rock, p=paper, or s=scissors</h1>
+  </div>
+  <br>
+
+  <!-- display who won -->
+  <div> 
+    <p>Wins: <span id="win-total">0</span></p>
+    <br>
+    <p>Loses: <span id="loss-total">0</span></p>
+    <br>
+    <p>Guesses Left: <span id="guesses-left">0</span></p>
+    <br>
+    <p>User Guesses: [<span id="user-guesses"> </span>]</div></p>
+
+  <!-- end HTML -->
+
+  <script type="text/javascript">
+
+    //Begin Psychic Game JS code
+
+    //declare variables and initialize them
+    // Creates an array that lists out all of the options (Rock, Paper, or Scissors).
+    var computerGuessesValidSet = genCharArray(charA, charZ);
+    
+    // initialize game variables
+    var wins = 0;
+    var losses = 0;
+    var guessesLeft = 9;
+    var pastUserGuesses = [ ];
+    var pastComputerGuesses = [];
+    
+        //loop forever and forever
+        while (true) {
+
+            // Initialize computerGuess 
+            // Randomly chooses a choice from the options array. This is the Computer's guess.
+            var computerGuess = computerChoices[Math.floor(Math.random() * pastComputerGuesses.length)];
+
+            //Take in user guess
+            //This function is run whenever the user presses a key.
+            document.onkeyup = function (event) {
+
+            // Determines which key was pressed.
+            var userGuess = event.key;
+            
+            // Alerts the key the user pressed (userGuess).
+            alert("User guess: " + userGuess);
+
+            //IF user guess is a lowercase character proceed
+            if (validateUserData(userGuess) == true ) {
+            
+                //Get Computer choice
+                //Compare Computer choice to user choice to determineif there was a match
+                //if match 
+                //  increment wins
+                //  reset guesses left
+                //else !match
+                //  decrement guesses left
+                //  append to guesses chosen
+                if (userGuess == computerGuess) {
+                    
+                    wins++;
+
+                }
+                else {
+                    guessesLeft--;
+                    pastUserGuesses.push(userGuess);
+                    
+                    //createand then display HTML string from an array
+                    //set HTML to display the user guesses
+                    guessesHtmlString = createArrayString(pastUserGuesses);
+                    userGuessesHtml.innerHTML = ("<h1>The computer guessed: " + guessesHtmlString + "</h1>");
+                
+                }
+            
+                //check if user ran out of guesses
+                //if no guesses left 
+                //  increment losses
+                //  reset guesses for next 'game'
+                //else 
+                //  do nothing
+                if (guessesLeft) {
+                    losses++;
+                    guessesLeft = 9;
+                }
+
+                //Display who won
+                //Get HTML element for displaying winner
+                var winnerTextHTML = document.getElementById("who-won");
+                //set HTML to winner
+                winnerTextHTML.innerHTML = ("<h1>" + winner + "</h1>");
+
+                //Display computer choice
+                //Get HTML element for displaying winner
+                var computerChoiceTextHTML = document.getElementById("computer-guess");
+                //set HTML to computer choice
+                computerChoiceTextHTML.innerHTML = ("<h1>The computer guessed: " + computerGuess + "</h1>");
+
+
+                //Display user choice
+                //Get HTML element for displaying winner
+                var userChoiceTextHTML = document.getElementById("user-guess");
+                //set HTML to computer choice
+                userChoiceTextHTML.innerHTML = ("<h1>The user guessed: " + userGuess + "</h1>");
+            }
+            //ELSE do nothing
+
+            };
+
+        }
+
+            //
+            //JS function declarations
+            //
+
+            // generate array of alphabet a-z; lowercase letters only
+            function genCharArray(arrayName) {
+                var alpha = charA.charCodeAt(0)
+                var omega = charZ.charCodeAt(0);
+                
+                for (; alpha <= omega; ++alpha) {
+                    arrayName.push(String.fromCharCode(i));
+                }
+            return arrayName;
+            }
+
+            //checks if input is in the valid set - used in this case to validate user input as a lowercase letter or not
+            function validateUserData(userData) {
+                for(i=0; i < computerGuessesValidSet.length; i++ ){
+                    if ( userData == computerGuessesValidSet[i]){
+                        return true;
+                    }
+                }
+            return false;
+            }
+
+            //create HTML string from an array
+            function createArrayString(array) {
+                var string = null;
+                var arrayLength = array.length;
+
+                for (i=0;i < arrayLength;i++) {
+                    string = (string + "array[i]" + ", ");
+                }
+
+            }
+
+
+  </script>
+
+</body>
+
+</html>
