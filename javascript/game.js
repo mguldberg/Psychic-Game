@@ -71,7 +71,7 @@
                     userGuessesHTML.innerHTML = (" ");
 
                     //ask user to try again
-                    alert("You win!! The winning guess was: " + computerGuess);
+                    alert("You win!! The winning guess was: " + computerGuess +".");
 
                     // Initialize new computerGuess 
                     // Randomly chooses a choice from the options array. This is the Computer's guess.
@@ -146,7 +146,7 @@
 
                     //ask user to try again
                     // alert("Please try again!!");
-                    alert("PLease try again");
+                    alert("PLease try again.  The letter I was thinking of was: '" + computerGuess +"'.");
 
                     //Reset guesses left total in HTML
                     //Get HTML element for displaying guesses left
